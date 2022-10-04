@@ -1,8 +1,8 @@
-import { PrismaService } from 'nestjs-prisma';
-import { Injectable, BadRequestException } from '@nestjs/common';
-import { PasswordService } from 'src/auth/password.service';
-import { ChangePasswordInput } from './dto/change-password.input';
-import { UpdateUserInput } from './dto/update-user.input';
+import { PrismaService } from 'nestjs-prisma'
+import { Injectable, BadRequestException } from '@nestjs/common'
+import { PasswordService } from 'src/auth/password.service'
+import { ChangePasswordInput } from './dto/change-password.input'
+import { UpdateUserInput } from './dto/update-user.input'
 
 @Injectable()
 export class UsersService {
@@ -17,7 +17,7 @@ export class UsersService {
       where: {
         id: userId,
       },
-    });
+    })
   }
 
   async changePassword(
@@ -28,21 +28,21 @@ export class UsersService {
     const passwordValid = await this.passwordService.validatePassword(
       changePassword.oldPassword,
       userPassword
-    );
+    )
 
     if (!passwordValid) {
-      throw new BadRequestException('Invalid password');
+      throw new BadRequestException('Invalid password')
     }
 
     const hashedPassword = await this.passwordService.hashPassword(
       changePassword.newPassword
-    );
+    )
 
     return this.prisma.user.update({
       data: {
         password: hashedPassword,
       },
       where: { id: userId },
-    });
+    })
   }
 }

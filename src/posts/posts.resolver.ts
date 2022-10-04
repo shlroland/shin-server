@@ -1,4 +1,4 @@
-import { PrismaService } from 'nestjs-prisma';
+import { PrismaService } from 'nestjs-prisma'
 import {
   Resolver,
   Query,
@@ -7,22 +7,22 @@ import {
   ResolveField,
   Subscription,
   Mutation,
-} from '@nestjs/graphql';
-import { findManyCursorConnection } from '@devoxa/prisma-relay-cursor-connection';
-import { PubSub } from 'graphql-subscriptions';
-import { UseGuards } from '@nestjs/common';
-import { PaginationArgs } from 'src/common/pagination/pagination.args';
-import { UserEntity } from 'src/common/decorators/user.decorator';
-import { User } from 'src/users/models/user.model';
-import { GqlAuthGuard } from 'src/auth/gql-auth.guard';
-import { PostIdArgs } from './args/post-id.args';
-import { UserIdArgs } from './args/user-id.args';
-import { Post } from './models/post.model';
-import { PostConnection } from './models/post-connection.model';
-import { PostOrder } from './dto/post-order.input';
-import { CreatePostInput } from './dto/createPost.input';
+} from '@nestjs/graphql'
+import { findManyCursorConnection } from '@devoxa/prisma-relay-cursor-connection'
+import { PubSub } from 'graphql-subscriptions'
+import { UseGuards } from '@nestjs/common'
+import { PaginationArgs } from 'src/common/pagination/pagination.args'
+import { UserEntity } from 'src/common/decorators/user.decorator'
+import { User } from 'src/users/models/user.model'
+import { GqlAuthGuard } from 'src/auth/gql-auth.guard'
+import { PostIdArgs } from './args/post-id.args'
+import { UserIdArgs } from './args/user-id.args'
+import { Post } from './models/post.model'
+import { PostConnection } from './models/post-connection.model'
+import { PostOrder } from './dto/post-order.input'
+import { CreatePostInput } from './dto/createPost.input'
 
-const pubSub = new PubSub();
+const pubSub = new PubSub()
 
 @Resolver(() => Post)
 export class PostsResolver {
@@ -30,7 +30,7 @@ export class PostsResolver {
 
   @Subscription(() => Post)
   postCreated() {
-    return pubSub.asyncIterator('postCreated');
+    return pubSub.asyncIterator('postCreated')
   }
 
   @UseGuards(GqlAuthGuard)
@@ -46,9 +46,9 @@ export class PostsResolver {
         content: data.content,
         authorId: user.id,
       },
-    });
-    pubSub.publish('postCreated', { postCreated: newPost });
-    return newPost;
+    })
+    pubSub.publish('postCreated', { postCreated: newPost })
+    return newPost
   }
 
   @Query(() => PostConnection)
@@ -82,15 +82,15 @@ export class PostsResolver {
           },
         }),
       { first, last, before, after }
-    );
-    return a;
+    )
+    return a
   }
 
   @Query(() => [Post])
   userPosts(@Args() id: UserIdArgs) {
     return this.prisma.user
       .findUnique({ where: { id: id.userId } })
-      .posts({ where: { published: true } });
+      .posts({ where: { published: true } })
 
     // or
     // return this.prisma.posts.findMany({
@@ -103,11 +103,11 @@ export class PostsResolver {
 
   @Query(() => Post)
   async post(@Args() id: PostIdArgs) {
-    return this.prisma.post.findUnique({ where: { id: id.postId } });
+    return this.prisma.post.findUnique({ where: { id: id.postId } })
   }
 
   @ResolveField('author', () => User)
   async author(@Parent() post: Post) {
-    return this.prisma.post.findUnique({ where: { id: post.id } }).author();
+    return this.prisma.post.findUnique({ where: { id: post.id } }).author()
   }
 }

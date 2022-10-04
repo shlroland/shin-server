@@ -1,4 +1,4 @@
-import { registerEnumType } from '@nestjs/graphql';
+import { registerEnumType } from '@nestjs/graphql'
 
 export enum OrderDirection {
   // Specifies an ascending order for a given `orderBy` argument.
@@ -11,4 +11,4 @@ registerEnumType(OrderDirection, {
   name: 'OrderDirection',
   description:
     'Possible directions in which to order a list of items when provided an `orderBy` argument.',
-});
+})

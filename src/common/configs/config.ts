@@ -1,8 +1,8 @@
-import type { Config } from './config.interface';
+import type { Config } from './config.interface'
 
 const config: Config = {
   nest: {
-    port: 3000,
+    port: 8023,
   },
   cors: {
     enabled: true,
@@ -25,6 +25,6 @@ const config: Config = {
     refreshIn: '7d',
     bcryptSaltOrRound: 10,
   },
-};
+}
 
-export default (): Config => config;
+export default (): Config => config

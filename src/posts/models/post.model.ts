@@ -1,18 +1,18 @@
-import { Field, ObjectType } from '@nestjs/graphql';
-import { User } from 'src/users/models/user.model';
-import { BaseModel } from 'src/common/models/base.model';
+import { Field, ObjectType } from '@nestjs/graphql'
+import { User } from 'src/users/models/user.model'
+import { BaseModel } from 'src/common/models/base.model'
 
 @ObjectType()
 export class Post extends BaseModel {
   @Field()
-  title: string;
+  title: string
 
   @Field(() => String, { nullable: true })
-  content?: string | null;
+  content?: string | null
 
   @Field(() => Boolean)
-  published: boolean;
+  published: boolean
 
   @Field(() => User, { nullable: true })
-  author?: User | null;
+  author?: User | null
 }

@@ -6,15 +6,15 @@ Starter template for 😻 [NestJS](https://nestjs.com/) and [Prisma](https://www
 
 ## Version
 
-| Branch                                                                                                       |  Nest | Prisma                                               |  Graphql                                                              |
-| ------------------------------------------------------------------------------------------------------------ | ----- | ---------------------------------------------------- | --------------------------------------------------------------------- |
-| main                                                                                                       | v9    | [v4](https://github.com/prisma/prisma)         | [Code-first](https://docs.nestjs.com/graphql/quick-start#code-first)  |
-| [nest-8-prisma-3](https://github.com/fivethree-team/nestjs-prisma-starter/tree/nest-8-prisma-3)                                                                                                       | v8    | [v3](https://github.com/prisma/prisma)         | [Code-first](https://docs.nestjs.com/graphql/quick-start#code-first)  |
-| [nest-7](https://github.com/fivethree-team/nestjs-prisma-starter/tree/nest-7)                                                                                                       | v7    | [v2](https://github.com/prisma/prisma2)         | [Code-first](https://docs.nestjs.com/graphql/quick-start#code-first)  |
+| Branch                                                                                                              |  Nest | Prisma                                          |  Graphql                                                              |
+| ------------------------------------------------------------------------------------------------------------------- | ----- | ----------------------------------------------- | --------------------------------------------------------------------- |
+| main                                                                                                                | v9    | [v4](https://github.com/prisma/prisma)          | [Code-first](https://docs.nestjs.com/graphql/quick-start#code-first)  |
+| [nest-8-prisma-3](https://github.com/fivethree-team/nestjs-prisma-starter/tree/nest-8-prisma-3)                     | v8    | [v3](https://github.com/prisma/prisma)          | [Code-first](https://docs.nestjs.com/graphql/quick-start#code-first)  |
+| [nest-7](https://github.com/fivethree-team/nestjs-prisma-starter/tree/nest-7)                                       | v7    | [v2](https://github.com/prisma/prisma2)         | [Code-first](https://docs.nestjs.com/graphql/quick-start#code-first)  |
 | [nest-6-prisma2-code-first](https://github.com/fivethree-team/nestjs-prisma-starter/tree/nest-6-prisma2-code-first) | v6    | [v2-preview](https://github.com/prisma/prisma2) | [Code-first](https://github.com/19majkel94/type-graphql)              |
-| [nest-6-code-first](https://github.com/fivethree-team/nestjs-prisma-starter/tree/nest-6-code-first)         | v6    | [v1](https://github.com/prisma/prisma)               | [Code-first](https://github.com/19majkel94/type-graphql)              |
-| [nest-6-sdl-first](https://github.com/fivethree-team/nestjs-prisma-starter/tree/nest-6-sdl-first)                                                                                        | v6    | [v1](https://github.com/prisma/prisma)               | [SDL First](https://docs.nestjs.com/graphql/quick-start#schema-first) |
-| [nest-5](https://github.com/fivethree-team/nestjs-prisma-starter/tree/nest-5)                     | v5    | [v1](https://github.com/prisma/prisma)               | [SDL First](https://docs.nestjs.com/graphql/quick-start#schema-first) |
+| [nest-6-code-first](https://github.com/fivethree-team/nestjs-prisma-starter/tree/nest-6-code-first)                 | v6    | [v1](https://github.com/prisma/prisma)          | [Code-first](https://github.com/19majkel94/type-graphql)              |
+| [nest-6-sdl-first](https://github.com/fivethree-team/nestjs-prisma-starter/tree/nest-6-sdl-first)                   | v6    | [v1](https://github.com/prisma/prisma)          | [SDL First](https://docs.nestjs.com/graphql/quick-start#schema-first) |
+| [nest-5](https://github.com/fivethree-team/nestjs-prisma-starter/tree/nest-5)                                       | v5    | [v1](https://github.com/prisma/prisma)          | [SDL First](https://docs.nestjs.com/graphql/quick-start#schema-first) |
 
 ## Features
 
@@ -293,7 +293,7 @@ You can also add the `GraphQLModule` in the `AppModule` to make `Apollo` availab
 You need to set the URL to the NestJS GraphQL Api. Open the file `src/app/graphql.module.ts` and update `uri`:
 
 ```ts
-const uri = 'http://localhost:3000/graphql';
+const uri = 'http://localhost:3000/graphql'
 ```
 
 To use Apollo-Angular you can inject `private apollo: Apollo` into the constructor of a page, component or service.
@@ -325,7 +325,7 @@ const CurrentUserProfile = gql`
       name
     }
   }
-`;
+`
 
 @Component({
   selector: 'app-home',
@@ -333,14 +333,14 @@ const CurrentUserProfile = gql`
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  data: Observable<any>;
+  data: Observable<any>
 
   constructor(private apollo: Apollo) {}
 
   ngOnInit() {
     this.data = this.apollo.watchQuery({
       query: CurrentUserProfile,
-    }).valueChanges;
+    }).valueChanges
   }
 }
 ```
@@ -369,7 +369,7 @@ To execute a mutation you can use:
 ```ts
 this.apollo.mutate({
   mutation: YOUR_MUTATION,
-});
+})
 ```
 
 Here is an example how to login into your profile using the `login` Mutation:
@@ -386,7 +386,7 @@ const Login = gql`
       }
     }
   }
-`;
+`
 
 @Component({
   selector: 'app-home',
@@ -394,14 +394,14 @@ const Login = gql`
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  data: Observable<any>;
+  data: Observable<any>
 
   constructor(private apollo: Apollo) {}
 
   ngOnInit() {
     this.data = this.apollo.mutate({
       mutation: Login,
-    });
+    })
   }
 }
 ```
@@ -415,7 +415,7 @@ To execute a subscription you can use:
 ```ts
 this.apollo.subscribe({
   query: YOUR_SUBSCRIPTION_QUERY,
-});
+})
 ```
 
 **[⬆ back to top](#overview)**
@@ -429,14 +429,14 @@ Because the apollo client is using `HttpClient` under the hood you are able to s
 Create the following class:
 
 ```ts
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import {
   HttpEvent,
   HttpInterceptor,
   HttpHandler,
   HttpRequest,
-} from '@angular/common/http';
-import { Observable } from 'rxjs';
+} from '@angular/common/http'
+import { Observable } from 'rxjs'
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -446,16 +446,16 @@ export class TokenInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const token = 'YOUR_TOKEN'; // get from local storage
+    const token = 'YOUR_TOKEN' // get from local storage
     if (token !== undefined) {
       req = req.clone({
         setHeaders: {
           Authorization: `Bearer ${token}`,
         },
-      });
+      })
     }
 
-    return next.handle(req);
+    return next.handle(req)
   }
 }
 ```

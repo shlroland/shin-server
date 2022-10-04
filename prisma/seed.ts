@@ -1,12 +1,12 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 async function main() {
-  await prisma.user.deleteMany();
-  await prisma.post.deleteMany();
+  await prisma.user.deleteMany()
+  await prisma.post.deleteMany()
 
-  console.log('Seeding...');
+  console.log('Seeding...')
 
   const user1 = await prisma.user.create({
     data: {
@@ -23,7 +23,7 @@ async function main() {
         },
       },
     },
-  });
+  })
   const user2 = await prisma.user.create({
     data: {
       email: 'bart@simpson.com',
@@ -46,13 +46,13 @@ async function main() {
         ],
       },
     },
-  });
+  })
 
-  console.log({ user1, user2 });
+  console.log({ user1, user2 })
 }
 
 main()
   .catch((e) => console.error(e))
   .finally(async () => {
-    await prisma.$disconnect();
-  });
+    await prisma.$disconnect()
+  })
